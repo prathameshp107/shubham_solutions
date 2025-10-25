@@ -17,11 +17,59 @@ export function Contact() {
     service: '',
     message: '',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<{type: 'success' | 'error' | ''; message: string}>({type: '', message: ''})
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted:', formData)
+    setIsSubmitting(true)
+    setSubmitStatus({type: '', message: ''})
+    
+    try {
+      // TODO: Replace 'YOUR_FORM_ID' with your actual Formspree form ID
+      // Follow the instructions in CONTACT_FORM_SETUP.md to set up form submission
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          service: formData.service,
+          message: formData.message,
+        }),
+      })
+      
+      if (response.ok) {
+        setSubmitStatus({
+          type: 'success',
+          message: 'Thank you! Your message has been sent successfully. We will get back to you soon.'
+        })
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          message: '',
+        })
+      } else {
+        setSubmitStatus({
+          type: 'error',
+          message: 'Oops! Something went wrong. Please try again later.'
+        })
+      }
+    } catch (error) {
+      console.error('Form submission error:', error)
+      setSubmitStatus({
+        type: 'error',
+        message: 'Network error. Please check your connection and try again.'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const contactInfo = [
@@ -110,6 +158,16 @@ export function Contact() {
             <Card className="border-2 shadow-xl">
               <CardContent className="p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  {submitStatus.type === 'success' && (
+                    <div className="p-3 bg-green-100 text-green-700 rounded-md">
+                      {submitStatus.message}
+                    </div>
+                  )}
+                  {submitStatus.type === 'error' && (
+                    <div className="p-3 bg-red-100 text-red-700 rounded-md">
+                      {submitStatus.message}
+                    </div>
+                  )}
                   <div className="grid md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium text-foreground">
@@ -122,6 +180,7 @@ export function Contact() {
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         required
                         className="h-12"
+                        disabled={isSubmitting}
                       />
                     </div>
                     <div className="space-y-2">
@@ -136,6 +195,7 @@ export function Contact() {
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         required
                         className="h-12"
+                        disabled={isSubmitting}
                       />
                     </div>
                   </div>
@@ -153,6 +213,7 @@ export function Contact() {
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         required
                         className="h-12"
+                        disabled={isSubmitting}
                       />
                     </div>
                     <div className="space-y-2">
@@ -165,6 +226,7 @@ export function Contact() {
                         value={formData.service}
                         onChange={(e) => setFormData({ ...formData, service: e.target.value })}
                         className="h-12"
+                        disabled={isSubmitting}
                       />
                     </div>
                   </div>
@@ -180,11 +242,17 @@ export function Contact() {
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       required
                       className="min-h-[150px] resize-none"
+                      disabled={isSubmitting}
                     />
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full bg-primary hover:bg-primary/90">
-                    Send Message
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full bg-primary hover:bg-primary/90"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                     <Send className="ml-2 h-5 w-5" />
                   </Button>
                 </form>
