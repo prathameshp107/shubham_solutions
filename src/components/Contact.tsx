@@ -28,12 +28,12 @@ export function Contact() {
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: ['123 Business Street', 'Mumbai, Maharashtra 400001'],
+      details: ['Handewadi, Hadapsar Road', 'Pune 411028'],
     },
     {
       icon: Phone,
       title: 'Call Us',
-      details: ['+91 98765 43210', '+91 98765 43211'],
+      details: ['+91 7822874564'],
     },
     {
       icon: Mail,
@@ -201,7 +201,7 @@ export function Contact() {
           className="mt-12 rounded-xl overflow-hidden shadow-xl h-[400px]"
         >
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241316.64280182246!2d72.7410965!3d19.0821978!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1234567890"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3783.438065671445!2d73.931016!3d18.455548!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc2ebc2e6b9a5e1%3A0x0!2zMTjCsDI3JzIwLjAiTiA3M8KwNTUnNTguOSJF!5e0!3m2!1sen!2sin!4v1735147890123!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0 }}

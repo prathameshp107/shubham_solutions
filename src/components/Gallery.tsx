@@ -28,11 +28,6 @@ export function Gallery() {
       category: 'Society Services',
     },
     {
-      url: 'https://images.unsplash.com/photo-1519167758481-83f29da8ae39?w=600&h=400&fit=crop',
-      title: 'Team Celebration',
-      category: 'Corporate Events',
-    },
-    {
       url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&h=600&fit=crop',
       title: 'Home Cleaning',
       category: 'Cleaning Services',
