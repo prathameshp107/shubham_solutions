@@ -47,8 +47,13 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             className="flex items-center"
           >
-            <a href="#home" className="text-2xl font-bold text-primary">
-              Shubham Solutions
+            <a href="#home" className="flex items-baseline space-x-1">
+              <span className="text-2xl font-bold text-primary tracking-tight">
+                Shubham
+              </span>
+              <span className="text-2xl font-bold text-gray-800 tracking-tight">
+                Solutions
+              </span>
             </a>
           </motion.div>
 
